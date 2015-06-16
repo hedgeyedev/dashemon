@@ -1,0 +1,87 @@
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for @dashboard, html: { class: 'dashboard-form' } do |f| %>
+    <% if @dashboard.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@dashboard.errors.count, "error") %> prohibited this dashboard from being saved:</h2>
+
+        <ul>
+        <% @dashboard.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="dashboard-name">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="new-relic-charts">
+      <p>To find the embedded HTML for a New Relic chart:</p>
+      <ul>
+        <li>Login</li>
+        <li>Click Tools</li>
+        <li>Click Embedded Charts</li>
+        <li>Click Show chart & embed code</li>
+      </ul>
+      <%= f.nested_fields_for :new_relic_charts do |nrc_f| %>
+        <%= nrc_f.label :embedded_html, 'New Relic Embedded Chart HTML' %>
+        <%= nrc_f.text_area :embedded_html %>
+        <%= nrc_f.remove_nested_fields_link 'x', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+
+      <%= f.add_nested_fields_link :new_relic_charts, 'Add another New Relic Chart', class: 'link-button' %>
+    </div>
+
+    <hr />
+
+    <div class="airbrake-charts">
+      <p>To find the API key for Airbrake:</p>
+      <ul>
+        <li>Login</li>
+        <li>Click on your name in the top right corner</li>
+        <li>Click Settings</li>
+        <li>API key is at bottom of page, under 'Permissions'</li>
+      </ul>
+      <p>To find the project ID from Airbrake, it's the 5 digit number in the URL of the interface.</p>
+      <p>For example, https://researchedge.airbrake.io/projects/90686/groups it's 90686</p>
+      <%= f.nested_fields_for :airbrake_charts do |ac_f| %>
+        <%= ac_f.label :api_key, 'Airbrake API key' %>
+        <%= ac_f.text_field :api_key %>
+        <%= ac_f.label :project_id, 'Airbrake Project Id' %>
+        <%= ac_f.text_field :project_id %>
+        <%= ac_f.remove_nested_fields_link 'x', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+
+      <%= f.add_nested_fields_link :airbrake_charts, 'Add another Airbrake chart', class: 'link-button' %>
+    </div>
+
+    <hr />
+
+    <div class="heroku-charts">
+      <p>To find API key for Heroku:</p>
+      <ul>
+        <li>Assuming you have Heroku toolbelt installed</li>
+        <li>And you're logged in</li>
+        <li>type `heroku auth:token` in bash</li>
+      </ul>
+      <a href="https://devcenter.heroku.com/articles/platform-api-quickstart#authentication">Reference</a>
+      <%= f.nested_fields_for :heroku_charts do |h_f| %>
+        <%= h_f.label :api_key, 'Heroku API key' %>
+        <%= h_f.text_field :api_key %>
+        <%= h_f.label :app_id_or_name, 'Heroku App ID or Name' %>
+        <%= h_f.text_field :app_id_or_name %>
+        <%= h_f.remove_nested_fields_link 'x', data: { confirm: 'Are you sure?' } %>
+      <% end %>
+
+      <%= f.add_nested_fields_link :heroku_charts, 'Add another Heroku chart', class: 'link-button' %>
+    </div>
+
+    <hr />
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

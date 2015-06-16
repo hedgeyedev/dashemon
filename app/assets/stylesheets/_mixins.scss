@@ -1,0 +1,17 @@
+@mixin transition($seconds) {
+  -webkit-transition: all $seconds ease;
+  -moz-transition: all $seconds ease;
+  -o-transition: all $seconds ease;
+  transition: all $seconds ease;  
+}
+
+@mixin box-shadow($shadow) {
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin se-fixed-position-offset($bottom, $right) {
+  bottom: $bottom;
+  right: $right;
+}

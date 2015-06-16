@@ -1,0 +1,23 @@
+
+<ul>
+  <% @dashboard.new_relic_charts.each_with_index do |chart, idx| %>
+    <li data-row="1" data-col="<%= idx+1 %>" data-sizex="1" data-sizey="1" class="dashboard-item"><%= chart.embedded_html.html_safe %></li>
+  <% end %>
+  <% @airbrake_groups.each_with_index do |g, idx| %>
+    <li data-row="2" data-col="<%= idx+1 %>" data-sizex="1" data-sizey="1" class="dashboard-item">
+      <ul>
+        <% g.each do |err| %>
+          <li class="airbrake-error <%= add_resolved_css err['resolved'] %>">
+            <%= err['resolved'] %>
+            <%= err['lastNoticeAt'] %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+  <% @heroku_groups.each_with_index do |h, idx| %>
+    <li data-row="3" data-col="<%= idx+1 %>" data-sizex="2" data-sizey="1" class="dashboard-item">
+      <%= @heroku_groups[idx] %>
+    </li>
+  <% end %>
+</ul>

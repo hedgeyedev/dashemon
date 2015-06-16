@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  dashboard_user_id: 1
+  name: 'first dashboard'
+
+two:
+  id: 2
+  dashboard_user_id: 1

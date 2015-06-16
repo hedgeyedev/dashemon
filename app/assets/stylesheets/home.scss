@@ -1,0 +1,33 @@
+// Place all the styles related to the HomeController controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  color: white;
+}
+
+input {
+  color: black;
+}
+
+.bg-sand {
+  background-image: url("https://public.ducksboard.com/static/dashboard/img/backgrounds/sand.jpg?46c3348af6618011d75453544da2dd8b");
+  background-size: cover;
+}
+
+.links-panel {
+  text-align: center;
+  padding: $med-px;
+  background-color: $transparent-white;
+}
+
+a.link-button {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  color: #444;
+  width: $lg-px;
+  margin: $sm-px auto;
+  background-color: $dark-blue;
+  color: white;
+  padding: $sm-px;
+}

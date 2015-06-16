@@ -1,0 +1,61 @@
+
+<div id="fullscreen-toggle"><i class="fa fa-arrows-alt fa-5x"></i></div>
+<div id="tv-toggle"><i class="fa fa-area-chart fa-5x"></i></div>
+<script>
+(function() {
+  var dashboard = (function() {
+    var gridster = undefined,
+        sidebar = $('.sidebar'),
+        navbar = $('.navbar'),
+        mainContent = $('.main'),
+        animationOpts = {
+          duration: 350,
+          queue: false
+        };
+
+    $('#fullscreen-toggle').click(function() {
+      var mainContent = $('.main');
+
+      $(sidebar).animate({
+        left: parseInt($(sidebar).css('left'), 10) === 0 ? -($(sidebar).outerWidth()) : 0
+      }, animationOpts);
+
+      $(navbar).animate({
+        top: parseInt($(navbar).css('top'), 10) === 0 ? -($(navbar).outerHeight()) : 0
+      }, animationOpts);
+
+      $('body').animate({
+        'padding-top': $('body').css('padding-top') === '0px' ? '50px' : '0px' 
+      }, animationOpts); 
+
+      $(mainContent).toggleClass('main-fullscreen');
+    });
+
+    $('#tv-toggle').click(function() {
+      screenfull.request(mainContent[0]);
+    })
+
+    document.addEventListener(screenfull.raw.fullscreenchange, function(e) {
+      // when user escapes from fullscreen, remove full screen class
+      $('.main').toggleClass('main-fullscreen');
+      $(sidebar).toggle();
+      $(navbar).toggle();
+    }, false)
+
+    this.init = function() {
+      gridster = $('.gridster > ul').gridster({
+        widget_margins: [10, 10],
+        widget_base_dimensions: [250, 300],
+        resize: {
+          enabled: true
+        }
+      }).data('gridster');
+    }
+
+    return this;
+  }())
+
+  dashboard.init();
+}())
+</script>
+
